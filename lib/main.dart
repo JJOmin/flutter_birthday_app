@@ -12,8 +12,6 @@ import 'package:provider/provider.dart';
 import 'package:geburtstags_app/repository/birthday.repo.dart';
 import 'repository/colorpalletrepo.dart';
 import 'repository/settings.repo.dart';
-//import 'models/settings.model.dart';
-//import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {

@@ -26,13 +26,13 @@ class BirthdayRepo extends ChangeNotifier {
           notes: "Liebt klassische Musik",
         ),
         Birthday.withId(
-          date: DateTime(1988, 12, 11),
-          name: "Thomas",
-          sirname: "Becker",
-          emailAddress: "thomas.becker@web.de",
+          date: DateTime(1867, 7, 11),
+          name: "Marie",
+          sirname: "Curie",
+          emailAddress: "Marie.Curie@web.de",
           phoneNumber: "+4915734567890",
-          skills: "Fotografie",
-          notes: "Reist gerne",
+          skills: "Chemie",
+          notes: "krass",
         ),
         Birthday.withId(
           date: DateTime(2002, 5, 17),
@@ -120,5 +120,10 @@ class BirthdayRepo extends ChangeNotifier {
         .where((birthday) =>
             birthday.date.day == now.day && birthday.date.month == now.month)
         .toList();
+  }
+
+  void clearAll() async {
+    await _box.clear();
+    notifyListeners();
   }
 }
