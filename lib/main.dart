@@ -10,6 +10,9 @@ import 'package:geburtstags_app/screens/widget/bottom_nav_bar.dart';
 import 'package:geburtstags_app/screens/birthday_screen/detail/birthday_form.screen.dart';
 import 'package:provider/provider.dart';
 import 'package:geburtstags_app/repository/birthday.repo.dart';
+import 'repository/colorpalletrepo.dart';
+import 'repository/settings.repo.dart';
+//import 'models/settings.model.dart';
 
 void main() {
   //runApp(const MyApp());
@@ -17,6 +20,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => BirthdayRepo()),
+        ChangeNotifierProvider(create: (_) => SettingsRepo()),
       ],
       child: const MyApp(),
     ),
@@ -63,6 +67,8 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   int selectedIndex = 0;
+  final pallet = ColorPalletRepo().getPalletById("Standart", false);
+
   final Color backgroundColor = const Color.fromARGB(255, 255, 255, 255);
   final Color selectionColor = const Color.fromARGB(255, 93, 157, 242);
   List<String> headlines = [
@@ -104,8 +110,8 @@ class HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavBar(
         selectedIndex: selectedIndex,
         onTabSelected: onTabSelected,
-        backgroundColor: backgroundColor,
-        selectionColor: selectionColor,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        selectionColor: Color.fromARGB(255, 93, 158, 242),
       ),
     );
   }
