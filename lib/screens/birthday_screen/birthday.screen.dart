@@ -76,6 +76,7 @@ class BirthdayScreenState extends State<BirthdayScreen> {
                 child: const Icon(Icons.delete, color: Colors.white),
               ),
               child: Card(
+                color: Colors.white,
                 elevation: 3,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
