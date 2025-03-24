@@ -1,0 +1,2 @@
+/Users/tilly/Documents/Lernmaterial/Obsidian/Code/geburtstags-app/android/app/.cxx/Debug/j6n6f1d5/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+/Users/tilly/Documents/Lernmaterial/Obsidian/Code/geburtstags-app/android/app/.cxx/Debug/j6n6f1d5/armeabi-v7a/CMakeFiles/edit_cache.dir

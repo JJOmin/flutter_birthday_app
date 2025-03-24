@@ -1,0 +1,2 @@
+/Users/tilly/Documents/Lernmaterial/Obsidian/Code/geburtstags-app/android/app/.cxx/RelWithDebInfo/5n02l163/x86/CMakeFiles/edit_cache.dir
+/Users/tilly/Documents/Lernmaterial/Obsidian/Code/geburtstags-app/android/app/.cxx/RelWithDebInfo/5n02l163/x86/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/tilly/fvm/versions/3.29.1/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/tilly/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/tilly/Documents/Lernmaterial/Obsidian/Code/geburtstags-app/android/app/.cxx/Debug/i3z4ea2x/armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/tilly/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/tilly/Documents/Lernmaterial/Obsidian/Code/geburtstags-app/android/app/.cxx/Debug/i3z4ea2x/armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}
