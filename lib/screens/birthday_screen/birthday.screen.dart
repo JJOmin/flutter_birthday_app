@@ -81,11 +81,7 @@ class BirthdayScreenState extends State<BirthdayScreen> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
                 child: ListTile(
-                  leading: birthday.profileImage == null
-                      ? AvatarPlus(birthday.id, width: 50, height: 50)
-                      : ClipOval(
-                          child: Image.network(birthday.profileImage!,
-                              width: 50, height: 50, fit: BoxFit.cover)),
+                  leading: AvatarPlus(birthday.id, width: 50, height: 50),
                   title: Text(
                     birthday.name,
                     style: Theme.of(context).textTheme.titleMedium,

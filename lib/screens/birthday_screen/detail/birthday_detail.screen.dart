@@ -183,24 +183,12 @@ class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
                                 ),
                               ),
                               SizedBox(width: 20),
-                              (birthdayDetail.profileImage == null)
-                                  ? AvatarPlus(
-                                      birthdayDetail.id,
-                                      height:
-                                          MediaQuery.of(context).size.width -
-                                              300,
-                                      width: MediaQuery.of(context).size.width -
-                                          300,
-                                    )
-                                  : Image.network(
-                                      birthdayDetail.profileImage!,
-                                      height:
-                                          MediaQuery.of(context).size.width -
-                                              300,
-                                      width: MediaQuery.of(context).size.width -
-                                          300,
-                                      fit: BoxFit.cover,
-                                    )
+
+                              AvatarPlus(
+                                birthdayDetail.id,
+                                height: MediaQuery.of(context).size.width - 300,
+                                width: MediaQuery.of(context).size.width - 300,
+                              )
                             ],
                           ),
                           SizedBox(height: 5),

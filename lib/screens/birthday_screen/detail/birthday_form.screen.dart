@@ -25,6 +25,7 @@ class _BirthdayFormState extends State<BirthdayForm> {
   final notesController = TextEditingController();
   final phoneNumberController = TextEditingController();
   final zodiacSignController = TextEditingController();
+  final skillsController = TextEditingController();
   DateTime? _selectedDate;
   final dateTimeUtil = DateTimeUtil();
 
@@ -35,9 +36,10 @@ class _BirthdayFormState extends State<BirthdayForm> {
     if (widget.isEdit && birthday != null) {
       nameController.text = birthday.name;
       sirnameController.text = birthday.sirname;
-      mailController.text = birthday.emailAddress!;
-      phoneNumberController.text = birthday.phoneNumber!;
-      notesController.text = birthday.notes ?? "";
+      mailController.text = birthday.emailAddress;
+      phoneNumberController.text = birthday.phoneNumber;
+      skillsController.text = birthday.skills;
+      notesController.text = birthday.notes;
       _selectedDate = birthday.date;
       _dateController.text = DateFormat('dd.MM.yyyy').format(_selectedDate!);
     }
@@ -53,6 +55,7 @@ class _BirthdayFormState extends State<BirthdayForm> {
     notesController.dispose();
     phoneNumberController.dispose();
     zodiacSignController.dispose();
+    skillsController.dispose();
     super.dispose();
   }
 
@@ -67,6 +70,7 @@ class _BirthdayFormState extends State<BirthdayForm> {
         sirname: sirnameController.text,
         emailAddress: mailController.text,
         phoneNumber: phoneNumberController.text,
+        skills: skillsController.text,
         notes: notesController.text,
       );
 
