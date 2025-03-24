@@ -13,9 +13,23 @@ import 'package:geburtstags_app/repository/birthday.repo.dart';
 import 'repository/colorpalletrepo.dart';
 import 'repository/settings.repo.dart';
 //import 'models/settings.model.dart';
+//import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
-  //runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Hive initialisieren
+  await Hive
+      .initFlutter(); // alternativ zu getApplicationDocumentsDirectory + Hive.init(path)
+  Hive.registerAdapter(BirthdayAdapter());
+
+  // Box öffnen
+  await Hive.openBox<Birthday>('birthdays');
+
+  // Lokalisierung
+  await initializeDateFormatting('de_DE', null);
+
   runApp(
     MultiProvider(
       providers: [
@@ -25,7 +39,6 @@ void main() {
       child: const MyApp(),
     ),
   );
-  initializeDateFormatting('de_DE', null);
 }
 
 class MyApp extends StatelessWidget {

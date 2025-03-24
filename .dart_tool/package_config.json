@@ -9,7 +9,7 @@
     },
     {
       "name": "_macros",
-      "rootUri": "file:///Users/tilly/fvm/versions/stable/bin/cache/dart-sdk/pkg/_macros",
+      "rootUri": "file:///Users/tilly/fvm/versions/3.29.1/bin/cache/dart-sdk/pkg/_macros",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -183,7 +183,7 @@
     },
     {
       "name": "flutter",
-      "rootUri": "file:///Users/tilly/fvm/versions/stable/packages/flutter",
+      "rootUri": "file:///Users/tilly/fvm/versions/3.29.1/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -201,7 +201,7 @@
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///Users/tilly/fvm/versions/stable/packages/flutter_test",
+      "rootUri": "file:///Users/tilly/fvm/versions/3.29.1/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -213,7 +213,7 @@
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///Users/tilly/fvm/versions/stable/packages/flutter_web_plugins",
+      "rootUri": "file:///Users/tilly/fvm/versions/3.29.1/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -238,6 +238,12 @@
     {
       "name": "hive",
       "rootUri": "file:///Users/tilly/.pub-cache/hosted/pub.dev/hive-2.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "hive_flutter",
+      "rootUri": "file:///Users/tilly/.pub-cache/hosted/pub.dev/hive_flutter-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -489,7 +495,7 @@
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///Users/tilly/fvm/versions/stable/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///Users/tilly/fvm/versions/3.29.1/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -680,10 +686,10 @@
       "languageVersion": "3.4"
     }
   ],
-  "generated": "2025-03-24T14:29:21.554703Z",
+  "generated": "2025-03-24T14:40:40.273150Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
-  "flutterRoot": "file:///Users/tilly/fvm/versions/stable",
+  "flutterRoot": "file:///Users/tilly/fvm/versions/3.29.1",
   "flutterVersion": "3.29.1",
   "pubCache": "file:///Users/tilly/.pub-cache"
 }

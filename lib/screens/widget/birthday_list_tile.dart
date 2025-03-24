@@ -95,16 +95,7 @@ class _BirthdayListTileState extends State<BirthdayListTile>
             padding: EdgeInsets.symmetric(vertical: hasExtra ? 1.0 : 10),
             child: ListTile(
               onTap: widget.onTap,
-              leading: widget.birthday.profileImage == null
-                  ? AvatarPlus(widget.birthday.id, height: 50, width: 50)
-                  : ClipOval(
-                      child: Image.network(
-                        widget.birthday.profileImage!,
-                        height: 50,
-                        width: 50,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+              leading: AvatarPlus(widget.birthday.id, height: 50, width: 50),
               title: Text(
                 widget.birthday.name,
                 style: hasExtra

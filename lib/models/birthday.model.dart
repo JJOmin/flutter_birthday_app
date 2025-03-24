@@ -30,9 +30,6 @@ class Birthday {
   @HiveField(7)
   final String id;
 
-  @HiveField(8)
-  final String profileImage;
-
   Birthday({
     required this.id,
     required this.name,
@@ -40,7 +37,6 @@ class Birthday {
     required this.date,
     required this.phoneNumber,
     required this.emailAddress,
-    required this.profileImage,
     required this.notes,
     required this.skills,
     //required this.zodiacSign,
@@ -53,7 +49,6 @@ class Birthday {
     required DateTime date,
     required String phoneNumber,
     required String emailAddress,
-    required String profileImage,
     required String notes,
     required String skills,
   }) {
@@ -64,7 +59,6 @@ class Birthday {
       date: date,
       phoneNumber: phoneNumber,
       emailAddress: emailAddress,
-      profileImage: profileImage,
       notes: notes,
       skills: skills,
     );

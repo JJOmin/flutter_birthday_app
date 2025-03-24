@@ -3,8 +3,39 @@ import 'dart:collection';
 import 'package:flutter/widgets.dart';
 import 'package:geburtstags_app/models/birthday.model.dart';
 import 'package:geburtstags_app/utils/date_time.util.dart';
+import 'package:hive/hive.dart';
 
 class BirthdayRepo extends ChangeNotifier {
+  static final BirthdayRepo _birthdayRepo = BirthdayRepo._privateConstructor();
+
+  factory BirthdayRepo() => _birthdayRepo;
+
+  BirthdayRepo._privateConstructor() {
+    _box = Hive.box<Birthday>('birthdays');
+  }
+
+  late Box<Birthday> _box;
+
+  UnmodifiableListView<Birthday> getBirthdays() =>
+      UnmodifiableListView(_box.values.toList());
+
+  Birthday insert(Birthday birthday) {
+    _box.put(birthday.id, birthday);
+    notifyListeners();
+    return birthday;
+  }
+
+  void update({required Birthday oldBirthday, required Birthday newBirthday}) {
+    _box.put(newBirthday.id, newBirthday);
+    notifyListeners();
+  }
+
+  void delete(Birthday birthday) {
+    _box.delete(birthday.id);
+    notifyListeners();
+  }
+
+/*
   // Private Constructor
   BirthdayRepo._privateConstructor() {
     _birthdays.addAll([
@@ -118,13 +149,13 @@ class BirthdayRepo extends ChangeNotifier {
     _birthdays.remove(birthday);
     notifyListeners();
   }
-
+*/
   //Neue Logic hinzugefügt: abzüglich der Geburtstage die heute sind!!!
   List<Birthday> getNextFiveBirthdays() {
     final dateTimeUtil = DateTimeUtil();
     final todaysBirthdays = getTodaysBirthdays();
     var listLength = 6;
-    List<Birthday> nextFiveBirthdays = _birthdays
+    List<Birthday> nextFiveBirthdays = _box.values
         .where((birthday) =>
             !todaysBirthdays.any((excluded) => excluded.id == birthday.id))
         .toList();
@@ -144,15 +175,10 @@ class BirthdayRepo extends ChangeNotifier {
   }
 
   List<Birthday> getTodaysBirthdays() {
-    List<Birthday> list = [];
-
-    for (var i = 0; i < _birthdays.length; i++) {
-      if (_birthdays[i].date.day == DateTime.now().day &&
-          _birthdays[i].date.month == DateTime.now().month) {
-        list.add(_birthdays[i]);
-      }
-    }
-
-    return list;
+    final now = DateTime.now();
+    return _box.values
+        .where((birthday) =>
+            birthday.date.day == now.day && birthday.date.month == now.month)
+        .toList();
   }
 }
