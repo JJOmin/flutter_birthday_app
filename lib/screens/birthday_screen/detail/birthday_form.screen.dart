@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:geburtstags_app/repository/birthday.repo.dart';
 import 'package:geburtstags_app/models/birthday.model.dart';
 import 'package:geburtstags_app/utils/date_time.util.dart';
+import 'package:provider/provider.dart';
 
 class BirthdayForm extends StatefulWidget {
   const BirthdayForm({super.key, this.birthday, this.isEdit = false});
@@ -30,33 +31,60 @@ class _BirthdayFormState extends State<BirthdayForm> {
   @override
   void initState() {
     super.initState();
-    if (widget.isEdit) {
-      idController.text = widget.birthday!.id;
-      nameController.text = widget.birthday!.name.toString();
-      sirnameController.text = widget.birthday!.sirname.toString();
-      mailController.text = widget.birthday!.emailAddress.toString();
-      phoneNumberController.text = widget.birthday!.phoneNumber.toString();
-      zodiacSignController.text =
-          dateTimeUtil.getZodiacSign(widget.birthday!.date);
-      notesController.text = widget.birthday!.notes ?? "";
-      _selectedDate = widget.birthday!.date;
-      _dateController.text = _selectedDate != null
-          ? _selectedDate!.toLocal().toString().split(' ')[0]
-          : "";
+    final birthday = widget.birthday;
+    if (widget.isEdit && birthday != null) {
+      nameController.text = birthday.name;
+      sirnameController.text = birthday.sirname;
+      mailController.text = birthday.emailAddress!;
+      phoneNumberController.text = birthday.phoneNumber!;
+      notesController.text = birthday.notes ?? "";
+      _selectedDate = birthday.date;
+      _dateController.text = DateFormat('dd.MM.yyyy').format(_selectedDate!);
     }
-    nameController.addListener(() => setState(() {}));
-    sirnameController.addListener(() => setState(() {}));
-    mailController.addListener(() => setState(() {}));
-    phoneNumberController.addListener(() => setState(() {}));
-    notesController.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    idController.dispose();
+    nameController.dispose();
+    sirnameController.dispose();
+    mailController.dispose();
+    _dateController.dispose();
+    notesController.dispose();
+    phoneNumberController.dispose();
+    zodiacSignController.dispose();
+    super.dispose();
+  }
+
+  void _saveBirthday(BuildContext context) {
+    if (_formKey.currentState!.validate() && _selectedDate != null) {
+      final birthdayRepo = context.read<BirthdayRepo>();
+
+      final birthday = Birthday(
+        id: widget.isEdit ? widget.birthday!.id : UniqueKey().toString(),
+        date: _selectedDate!,
+        name: nameController.text,
+        sirname: sirnameController.text,
+        emailAddress: mailController.text,
+        phoneNumber: phoneNumberController.text,
+        notes: notesController.text,
+      );
+
+      widget.isEdit
+          ? birthdayRepo.update(
+              oldBirthday: widget.birthday!, newBirthday: birthday)
+          : birthdayRepo.insert(birthday);
+
+      Navigator.pop(context);
+    }
   }
 
   Future<void> _selectDate(BuildContext context) async {
-    DateTime initialDate = _selectedDate ?? DateTime.now();
-    DateTime firstDate = DateTime(1900);
-    DateTime lastDate = DateTime(2100);
+    final DateTime initialDate = _selectedDate ?? DateTime.now();
+    final DateTime firstDate = DateTime(1900);
+    final DateTime lastDate = DateTime(2100);
 
-    DateTime? pickedDate = await showDatePicker(
+    final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: initialDate,
       firstDate: firstDate,
@@ -92,34 +120,7 @@ class _BirthdayFormState extends State<BirthdayForm> {
                     'Speichern',
                     style: TextStyle(color: Colors.white),
                   ),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate() &&
-                        _selectedDate != null) {
-                      if (widget.isEdit) {
-                        Birthday updatedBirthday = Birthday(
-                            id: widget.birthday!.id,
-                            date: _selectedDate!,
-                            name: nameController.text,
-                            sirname: sirnameController.text,
-                            emailAddress: mailController.text,
-                            phoneNumber: phoneNumberController.text,
-                            notes: notesController.text);
-                        BirthdayRepo.instance.update(
-                            oldBirthday: widget.birthday!,
-                            newBirhtday: updatedBirthday);
-                      } else {
-                        Birthday newdBirthday = Birthday.withId(
-                            date: _selectedDate!,
-                            name: nameController.text,
-                            sirname: sirnameController.text,
-                            emailAddress: mailController.text,
-                            phoneNumber: phoneNumberController.text,
-                            notes: notesController.text);
-                        BirthdayRepo.instance.insert(newdBirthday);
-                      }
-                      Navigator.pop(context);
-                    }
-                  },
+                  onPressed: () => _saveBirthday(context),
                 ),
               ],
               centerTitle: true,

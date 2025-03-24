@@ -7,6 +7,7 @@ import 'package:geburtstags_app/screens/birthday_screen/detail/birthday_detail.s
 
 import 'package:geburtstags_app/screens/widget/birthday_card_section.dart';
 import 'package:geburtstags_app/screens/widget/refresh_indicator.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final dateTimeUtil = DateTimeUtil();
   List<Birthday> nextFiveBirthdays = [];
   List<Birthday> todaysBirthdays = [];
-
+  /*
   @override
   void initState() {
     super.initState();
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       todaysBirthdays = BirthdayRepo.instance.getTodaysBirthdays();
     });
   }
-
+*/
   void showSnackbar(Birthday birthday) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('${birthday.name} gelöscht.')),
@@ -42,12 +43,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final birthdayRepo = context.watch<BirthdayRepo>();
+    //final birthdays = birthdayRepo().getNextFiveBirthdays();
+    final nextFiveBirthdays = birthdayRepo.getNextFiveBirthdays();
+    final todaysBirthdays = birthdayRepo.getTodaysBirthdays();
+
     return Scaffold(
       backgroundColor: const Color(0xFFF9F9F9),
       body: CustomRefreshWrapper(
         onRefresh: () async {
           await Future.delayed(const Duration(seconds: 1));
-          loadBirthdays();
+          //loadBirthdays();
         },
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -67,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   context,
                   BirthdayDetailScreen.routeName,
                   arguments: birthday,
-                ).then((_) => loadBirthdays());
+                ); //.then((_) => loadBirthdays());
               },
             ),
             SizedBox(height: 10),
@@ -89,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   context,
                   BirthdayDetailScreen.routeName,
                   arguments: birthday,
-                ).then((_) => loadBirthdays());
+                ); //.then((_) => //loadBirthdays());
               },
             ),
           ],

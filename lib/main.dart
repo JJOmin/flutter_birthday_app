@@ -7,11 +7,20 @@ import 'package:geburtstags_app/screens/widget/simple_app_bar.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:geburtstags_app/screens/home.screen.dart';
 import 'package:geburtstags_app/screens/widget/bottom_nav_bar.dart';
-
 import 'package:geburtstags_app/screens/birthday_screen/detail/birthday_form.screen.dart';
+import 'package:provider/provider.dart';
+import 'package:geburtstags_app/repository/birthday.repo.dart';
 
 void main() {
-  runApp(const MyApp());
+  //runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => BirthdayRepo()),
+      ],
+      child: const MyApp(),
+    ),
+  );
   initializeDateFormatting('de_DE', null);
 }
 

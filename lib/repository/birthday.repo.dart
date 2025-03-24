@@ -1,12 +1,15 @@
+import 'dart:collection';
+
+import 'package:flutter/widgets.dart';
 import 'package:geburtstags_app/models/birthday.model.dart';
 import 'package:geburtstags_app/utils/date_time.util.dart';
 
-class BirthdayRepo {
+class BirthdayRepo extends ChangeNotifier {
   // Private Constructor
   BirthdayRepo._privateConstructor() {
     _birthdays.addAll([
       Birthday.withId(
-          date: DateTime(1995, 3, 21),
+          date: DateTime(1995, 3, 24),
           name: "Anna",
           sirname: "Schmidt",
           emailAddress: "anna.schmidt@gmail.com",
@@ -88,26 +91,32 @@ class BirthdayRepo {
     ]);
   }
 
-  static final BirthdayRepo _instance = BirthdayRepo._privateConstructor();
-  static BirthdayRepo get instance => _instance;
+  static final BirthdayRepo _birthdayRepo = BirthdayRepo._privateConstructor();
 
-  //final dateTimeUtil = DateTimeUtil();
+  factory BirthdayRepo() {
+    return _birthdayRepo;
+  }
+  //static BirthdayRepo get instance => _instance;
 
   final List<Birthday> _birthdays = [];
-  List<Birthday> getBirthdays() => _birthdays;
+  UnmodifiableListView<Birthday> getBirthdays() =>
+      UnmodifiableListView(_birthdays);
 
   Birthday insert(Birthday birthday) {
     _birthdays.add(birthday);
+    notifyListeners();
     return birthday;
   }
 
-  void update({required Birthday oldBirthday, required Birthday newBirhtday}) {
+  void update({required Birthday oldBirthday, required Birthday newBirthday}) {
     _birthdays.remove(oldBirthday);
-    _birthdays.add(newBirhtday);
+    _birthdays.add(newBirthday);
+    notifyListeners();
   }
 
   void delete(Birthday birthday) {
     _birthdays.remove(birthday);
+    notifyListeners();
   }
 
   //Neue Logic hinzugefügt: abzüglich der Geburtstage die heute sind!!!
@@ -130,6 +139,7 @@ class BirthdayRepo {
     if (nextFiveBirthdays.length > listLength) {
       return nextFiveBirthdays.sublist(0, listLength);
     }
+
     return nextFiveBirthdays;
   }
 
@@ -142,6 +152,7 @@ class BirthdayRepo {
         list.add(_birthdays[i]);
       }
     }
+
     return list;
   }
 }
