@@ -5,6 +5,7 @@ import 'package:geburtstags_app/utils/date_time.util.dart';
 import 'package:intl/intl.dart';
 import 'package:geburtstags_app/repository/birthday.repo.dart';
 import 'package:avatar_plus/avatar_plus.dart';
+import 'package:provider/provider.dart';
 
 class BirthdayDetailScreen extends StatefulWidget {
   const BirthdayDetailScreen({
@@ -20,25 +21,10 @@ class BirthdayDetailScreen extends StatefulWidget {
 }
 
 class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
-  late Birthday birthday;
+  //late Birthday birthday;
   final dateTimeUtil = DateTimeUtil();
 
-  @override
-  void initState() {
-    super.initState();
-    loadBirthday(); // 🎯 Beim ersten Laden direkt aus dem Repository holen
-  }
-
-  void loadBirthday() {
-    setState(() {
-      // 🎯 Holt den aktuellen Birthday-Eintrag aus der Liste
-      birthday = BirthdayRepo.instance
-          .getBirthdays()
-          .firstWhere((b) => b.id == widget.birthday.id);
-    });
-  }
-
-  void _showAlertDialog() {
+  void showAlertDialog(Birthday birthday) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -47,17 +33,14 @@ class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
           actions: <Widget>[
             TextButton(
               child: const Text("Abbrechen"),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: () => Navigator.pop(context),
             ),
             TextButton(
               child: const Text("Löschen"),
               onPressed: () {
-                BirthdayRepo.instance.delete(birthday);
-                Navigator.pop(context); // Closes dialog
-                Navigator.pop(
-                    context, true); // Closes previous screen if applicable
+                context.read<BirthdayRepo>().delete(birthday);
+                Navigator.pop(context); // Dialog schließen
+                Navigator.pop(context, true); // ← Detail-Seite schließen
               },
             ),
           ],
@@ -68,7 +51,21 @@ class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final fullName = "${birthday.name} ${birthday.sirname}";
+    final birthdayRepo = context.watch<BirthdayRepo>();
+    final birthdayDetail =
+        birthdayRepo.getBirthdays().cast<Birthday?>().firstWhere(
+              (b) => b!.id == widget.birthday.id,
+              orElse: () => null,
+            );
+
+    if (birthdayDetail == null) {
+      // Wichtig: Sofort Return, um Null-Fehler zu vermeiden!
+      return const Scaffold(
+        body: Center(child: Text("Geburtstag existiert nicht mehr.")),
+      );
+    }
+
+    final fullName = "${birthdayDetail.name} ${birthdayDetail.sirname}";
 
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 250, 250, 250),
@@ -104,19 +101,28 @@ class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
                       },
                       onSelected: (value) async {
                         if (value == 0) {
-                          await Navigator.of(context).push(
+                          final updated = await Navigator.of(context).push(
                             MaterialPageRoute(
                               fullscreenDialog: true,
                               builder: (context) => BirthdayForm(
-                                birthday: birthday,
+                                birthday: birthdayDetail,
                                 isEdit: true,
                               ),
                             ),
                           );
-                          loadBirthday();
+                          if (updated == true) {
+                            setState(() {
+                              /*
+                              birthday = context
+                                  .read<BirthdayRepo>()
+                                  .getBirthdays()
+                                  .firstWhere(
+                                      (b) => b.id == widget.birthday.id);*/
+                            });
+                          }
                         }
                         if (value == 1) {
-                          _showAlertDialog();
+                          showAlertDialog(birthdayDetail);
                         }
                       },
                     ),
@@ -165,7 +171,7 @@ class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "${birthday.name} \n ${birthday.sirname}",
+                                      "${birthdayDetail.name} \n ${birthdayDetail.sirname}",
                                       style: Theme.of(context)
                                           .textTheme
                                           .displaySmall
@@ -177,9 +183,9 @@ class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
                                 ),
                               ),
                               SizedBox(width: 20),
-                              (birthday.profileImage == null)
+                              (birthdayDetail.profileImage == null)
                                   ? AvatarPlus(
-                                      birthday.id,
+                                      birthdayDetail.id,
                                       height:
                                           MediaQuery.of(context).size.width -
                                               300,
@@ -187,7 +193,7 @@ class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
                                           300,
                                     )
                                   : Image.network(
-                                      birthday.profileImage!,
+                                      birthdayDetail.profileImage!,
                                       height:
                                           MediaQuery.of(context).size.width -
                                               300,
@@ -219,21 +225,23 @@ class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(DateFormat('dd.MM.yyyy')
-                                          .format(birthday.date)),
+                                          .format(birthdayDetail.date)),
                                       const SizedBox(height: 15),
                                       const Text(
                                         'Handyummer:',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      Text(birthday.phoneNumber.toString()),
+                                      Text(birthdayDetail.phoneNumber
+                                          .toString()),
                                       const SizedBox(height: 15),
                                       const Text(
                                         'Email:',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      Text(birthday.emailAddress.toString()),
+                                      Text(birthdayDetail.emailAddress
+                                          .toString()),
                                     ],
                                   ),
                                   SizedBox(width: 35),
@@ -247,7 +255,7 @@ class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(dateTimeUtil
-                                          .getCurrentAge(birthday.date)
+                                          .getCurrentAge(birthdayDetail.date)
                                           .toString()),
                                       const SizedBox(height: 15),
                                       const Text(
@@ -256,7 +264,7 @@ class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(dateTimeUtil
-                                          .getZodiacSign(birthday.date)
+                                          .getZodiacSign(birthdayDetail.date)
                                           .toString()),
                                       const SizedBox(height: 15),
                                       const Text(
@@ -265,7 +273,7 @@ class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                          "${dateTimeUtil.getDaysLeft(birthday.date).toString()} Tagen"),
+                                          "${dateTimeUtil.getDaysLeft(birthdayDetail.date).toString()} Tagen"),
                                     ],
                                   ),
                                 ],
@@ -293,7 +301,7 @@ class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      Text(birthday.skills.toString()),
+                                      Text(birthdayDetail.skills.toString()),
                                     ],
                                   ),
                                   SizedBox(width: 80),
@@ -306,7 +314,7 @@ class _BirthdayDetailScreenState extends State<BirthdayDetailScreen> {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      Text(birthday.notes.toString()),
+                                      Text(birthdayDetail.notes.toString()),
                                     ],
                                   ),
                                 ],

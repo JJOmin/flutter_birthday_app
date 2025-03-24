@@ -93,7 +93,7 @@
     },
     {
       "name": "flutter",
-      "rootUri": "file:///Users/tilly/fvm/versions/stable/packages/flutter",
+      "rootUri": "file:///Users/tilly/fvm/versions/3.29.1/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -111,7 +111,7 @@
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///Users/tilly/fvm/versions/stable/packages/flutter_test",
+      "rootUri": "file:///Users/tilly/fvm/versions/3.29.1/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -123,7 +123,7 @@
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///Users/tilly/fvm/versions/stable/packages/flutter_web_plugins",
+      "rootUri": "file:///Users/tilly/fvm/versions/3.29.1/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -200,6 +200,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///Users/tilly/.pub-cache/hosted/pub.dev/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/tilly/.pub-cache/hosted/pub.dev/path-1.9.1",
       "packageUri": "lib/",
@@ -266,6 +272,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "provider",
+      "rootUri": "file:///Users/tilly/.pub-cache/hosted/pub.dev/provider-6.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sensors_plus",
       "rootUri": "file:///Users/tilly/.pub-cache/hosted/pub.dev/sensors_plus-6.1.1",
       "packageUri": "lib/",
@@ -291,7 +303,7 @@
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///Users/tilly/fvm/versions/stable/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///Users/tilly/fvm/versions/3.29.1/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.7"
     },
@@ -440,10 +452,10 @@
       "languageVersion": "3.4"
     }
   ],
-  "generated": "2025-03-24T08:57:46.329951Z",
+  "generated": "2025-03-24T11:28:55.848018Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
-  "flutterRoot": "file:///Users/tilly/fvm/versions/stable",
+  "flutterRoot": "file:///Users/tilly/fvm/versions/3.29.1",
   "flutterVersion": "3.29.1",
   "pubCache": "file:///Users/tilly/.pub-cache"
 }
