@@ -1,26 +1,48 @@
 import 'package:uuid/uuid.dart';
 
+import 'package:hive/hive.dart';
+
+part 'birthday.model.g.dart';
+
+@HiveType(typeId: 0)
 class Birthday {
-  final String id;
-  final String name;
-  final String sirname;
+  @HiveField(0)
   final DateTime date;
-  final String? phoneNumber;
-  final String? emailAddress;
-  final String? profileImage;
-  final String? notes;
-  final String? skills;
+
+  @HiveField(1)
+  final String name;
+
+  @HiveField(2)
+  final String sirname;
+
+  @HiveField(3)
+  final String emailAddress;
+
+  @HiveField(4)
+  final String phoneNumber;
+
+  @HiveField(5)
+  final String skills;
+
+  @HiveField(6)
+  final String notes;
+
+  @HiveField(7)
+  final String id;
+
+  @HiveField(8)
+  final String profileImage;
 
   Birthday({
     required this.id,
     required this.name,
     required this.sirname,
     required this.date,
-    this.phoneNumber,
-    this.emailAddress,
-    this.profileImage,
-    this.notes,
-    this.skills,
+    required this.phoneNumber,
+    required this.emailAddress,
+    required this.profileImage,
+    required this.notes,
+    required this.skills,
     //required this.zodiacSign,
   });
 
@@ -29,11 +51,11 @@ class Birthday {
     required String name,
     required String sirname,
     required DateTime date,
-    String? phoneNumber,
-    String? emailAddress,
-    String? profileImage,
-    String? notes,
-    String? skills,
+    required String phoneNumber,
+    required String emailAddress,
+    required String profileImage,
+    required String notes,
+    required String skills,
   }) {
     return Birthday(
       id: const Uuid().v4(), // Generiert eine eindeutige UUID
