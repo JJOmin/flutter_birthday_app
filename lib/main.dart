@@ -18,8 +18,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Hive initialisieren
-  await Hive
-      .initFlutter(); // alternativ zu getApplicationDocumentsDirectory + Hive.init(path)
+  await Hive.initFlutter();
   Hive.registerAdapter(BirthdayAdapter());
 
   // Box öffnen

@@ -1,0 +1,28 @@
+{
+  "buildFiles": [
+    "/Users/tilly/fvm/versions/stable/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/tilly/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/tilly/Documents/Lernmaterial/Obsidian/Code/flutter_birthday_app/android/app/.cxx/RelWithDebInfo/6z4f5y2c/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/tilly/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/tilly/Documents/Lernmaterial/Obsidian/Code/flutter_birthday_app/android/app/.cxx/RelWithDebInfo/6z4f5y2c/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {},
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/tilly/Library/Android/sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/Users/tilly/Library/Android/sdk/ndk/26.3.11579264/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": []
+}
