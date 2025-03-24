@@ -814,7 +814,7 @@
             "outputFile": "com.example.geburtstags_app-merged_res-26:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "/Users/tilly/Documents/Lernmaterial/Obsidian/Code/geburtstags-app/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/Users/tilly/Documents/Lernmaterial/Obsidian/Code/flutter_birthday_app/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -1310,7 +1310,24 @@
                     }
                 },
                 {
-                    "source": "/Users/tilly/Documents/Lernmaterial/Obsidian/Code/geburtstags-app/android/app/src/main/res/values/styles.xml",
+                    "source": "/Users/tilly/.gradle/caches/transforms-3/50ddf3f4c93399a5bafa41473ded90c1/transformed/jetified-activity-1.8.1/res/values/values.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,97",
+                        "endColumns": "41,59",
+                        "endOffsets": "92,152"
+                    },
+                    "to": {
+                        "startLines": "122,141",
+                        "startColumns": "4,4",
+                        "startOffsets": "5922,6931",
+                        "endColumns": "41,59",
+                        "endOffsets": "5959,6986"
+                    }
+                },
+                {
+                    "source": "/Users/tilly/Documents/Lernmaterial/Obsidian/Code/flutter_birthday_app/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -1326,23 +1343,6 @@
                         "endLines": "158,161",
                         "endColumns": "12,12",
                         "endOffsets": "8070,8239"
-                    }
-                },
-                {
-                    "source": "/Users/tilly/.gradle/caches/transforms-3/50ddf3f4c93399a5bafa41473ded90c1/transformed/jetified-activity-1.8.1/res/values/values.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,97",
-                        "endColumns": "41,59",
-                        "endOffsets": "92,152"
-                    },
-                    "to": {
-                        "startLines": "122,141",
-                        "startColumns": "4,4",
-                        "startOffsets": "5922,6931",
-                        "endColumns": "41,59",
-                        "endOffsets": "5959,6986"
                     }
                 },
                 {

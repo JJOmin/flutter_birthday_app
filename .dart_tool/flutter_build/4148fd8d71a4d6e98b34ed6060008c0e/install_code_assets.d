@@ -1,0 +1,1 @@
+ /Users/tilly/Documents/Lernmaterial/Obsidian/Code/flutter_birthday_app/.dart_tool/flutter_build/4148fd8d71a4d6e98b34ed6060008c0e/native_assets.json: 
