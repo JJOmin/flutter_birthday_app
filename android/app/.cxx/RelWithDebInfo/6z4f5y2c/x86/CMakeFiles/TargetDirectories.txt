@@ -1,0 +1,2 @@
+/Users/tilly/Documents/Lernmaterial/Obsidian/Code/flutter_birthday_app/android/app/.cxx/RelWithDebInfo/6z4f5y2c/x86/CMakeFiles/edit_cache.dir
+/Users/tilly/Documents/Lernmaterial/Obsidian/Code/flutter_birthday_app/android/app/.cxx/RelWithDebInfo/6z4f5y2c/x86/CMakeFiles/rebuild_cache.dir
